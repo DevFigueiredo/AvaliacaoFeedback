@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 import {Helmet} from "react-helmet";
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 export default function Login() {
 
@@ -17,21 +17,21 @@ export default function Login() {
   }
   return(
 
-<div id="Login" class="text-center card mx-auto" cz-shortcut-listen="true">
+<div id="Login" className="text-center card mx-auto" cz-shortcut-listen="true">
   
 <Helmet><title>Login</title></Helmet>
-    <form class="form-signin" onSubmit={Logar}>
-      <h1 class="h3 mb-3 font-weight-normal">Gerenciador de Supervisao</h1>
-      <label for="InputUsuario" class="sr-only">Usuário</label>
-      <input type="text" id="InputUsuario" class="form-control" placeholder="Digite o Usuário" required="" autofocus="" />
-      <label for="inputSenha" class="sr-only">Password</label>
-      <input type="password" id="inputSenha" class="form-control" placeholder="Digite a Senha" required="" />
-      <div class="checkbox mb-3">
+    <form className="form-signin" onSubmit={Logar}>
+      <h1 className="h3 mb-3 font-weight-normal">Gerenciador de Supervisao</h1>
+      <label for="InputUsuario" className="sr-only">Usuário</label>
+      <input type="text" id="InputUsuario" className="form-control" placeholder="Digite o Usuário" required="" autofocus="" />
+      <label for="inputSenha" className="sr-only">Password</label>
+      <input type="password" id="inputSenha" className="form-control" placeholder="Digite a Senha" required="" />
+      <div className="checkbox mb-3">
         <label>
           <input type="checkbox" value="LembrarSenha" /> Lembrar Senha
         </label>
       </div>
-      <button class="btn btn-lg btn-dark btn-block" type="submit">Conecte-se</button>
+      <button className="btn btn-lg btn-dark btn-block" type="submit">Conecte-se</button>
     </form>
     </div>
 

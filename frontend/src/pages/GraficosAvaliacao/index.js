@@ -9,10 +9,10 @@ export default function Avaliacao() {
 <div>
 <Helmet><title>Avaliacao</title></Helmet>   
 <Navbar />
-<div class="container-fluid">
-      <div class="row">
+<div className="container-fluid">
+      <div className="row">
             <Sidebar />
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 
                 
             </main>

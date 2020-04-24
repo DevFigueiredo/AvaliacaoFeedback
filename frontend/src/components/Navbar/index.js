@@ -1,18 +1,48 @@
-import React from 'react';
+import React,  { useState } from 'react';
 import './style.css';
 import { Link } from 'react-router-dom';
 
 export default function Navbar() {
-return(
-  <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/">JAA Soluções</a>
-  <input class="form-control form-control-dark w-100" type="text" placeholder="Busca Facilitadora" aria-label="Search" id="search" />
-  <ul class="navbar-nav px-3">
-    <li class="nav-item text-nowrap">
-      <Link class="nav-link" to="/">Desconectar-se</Link>
-    </li>
-  </ul>
+  let [Sidebar, SetSideBar ] = useState(false);
+
+  function SideBarLateral(){
+
+    if(!Sidebar){
+    SetSideBar(true);
+    document.querySelector('#SideBarLateral').style.display="block";     
+     }else{
+      SetSideBar(false);
+      document.querySelector('#SideBarLateral').style.display="none";
+    }
+  }
+  
+
+  return(
+  <nav className="navbar navbar-expand-lg sticky-top navbar-dark bg-dark p-0">
+  <Link className="navbar-brand col-sm-12 col-md-3 col-lg-2 mr-0">
+  <button className="navbar-toggler" onClick={SideBarLateral} type="button" >
+    <span className="navbar-toggler-icon"></span>
+  </button>
+&nbsp;
+    JAA Soluções
+
+  </Link>
+
+  <div className="collapse navbar-collapse" id="navbarColor01">
+      <input className="form-control mr-sm-2 form-control-dark w-100" type="search" placeholder="Search" aria-label="Search" />
+      <ul className="navbar-nav mr-auto">
+      <li className="nav-item active">
+        <Link className="nav-link" to="/">Sair </Link>
+      </li>
+
+
+
+
+
+    </ul>
+  </div>
 </nav> 
+
 );
 
 }
