@@ -1,10 +1,32 @@
 import React from 'react';
-import './style.css';
-import {Helmet} from "react-helmet";
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Link from '@material-ui/core/Link';
+import Box from '@material-ui/core/Box';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
 import { useHistory } from 'react-router-dom'
+import {Style} from './style';
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" href="#">JAA Soluções</Link>
+      {' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
 
-export default function Login() {
+const useStyles = Style;
 
+export default function Logar() {
   const history =  useHistory();
 
   async function Logar(e){
@@ -15,25 +37,60 @@ export default function Login() {
   alert('Falha no Login: Usuário ou Senha Inválidos!');
     }
   }
-  return(
 
-<div id="Login" className="text-center card mx-auto" cz-shortcut-listen="true">
-  
-<Helmet><title>Login</title></Helmet>
-    <form className="form-signin" onSubmit={Logar}>
-      <h1 className="h3 mb-3 font-weight-normal">Gerenciador de Supervisao</h1>
-      <label for="InputUsuario" className="sr-only">Usuário</label>
-      <input type="text" id="InputUsuario" className="form-control" placeholder="Digite o Usuário" required="" autofocus="" />
-      <label for="inputSenha" className="sr-only">Password</label>
-      <input type="password" id="inputSenha" className="form-control" placeholder="Digite a Senha" required="" />
-      <div className="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="LembrarSenha" /> Lembrar Senha
-        </label>
+  const classes = useStyles();
+
+  return (
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <div className={classes.paper} onSubmit={Logar}>
+        <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Gerenciador de Supervisão
+        </Typography>
+        <form className={classes.form} >
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="usuario"
+            label="Usuário"
+            name="usuario"
+            autoComplete="email"
+            autoFocus
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="senha"
+            label="Senha"
+            type="password"
+            id="senha"
+            autoComplete="current-password"
+          />
+          <FormControlLabel
+            control={<Checkbox value="lembrar-senha" color="primary" />}
+            label="Lembrar Senha"
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+             Conecte-se
+          </Button>
+        </form>
       </div>
-      <button className="btn btn-lg btn-dark btn-block" type="submit">Conecte-se</button>
-    </form>
-    </div>
-
-);
+      <Box mt={8}>
+        <Copyright />
+      </Box>
+    </Container>
+  );
 }

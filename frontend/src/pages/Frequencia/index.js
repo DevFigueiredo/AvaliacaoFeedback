@@ -1,52 +1,60 @@
 import React from 'react';
-import './style.css';
-import {Helmet} from "react-helmet";
-import Navbar from '../../components/Navbar';
-import Sidebar from '../../components/SideBar';
 
-export default function Frequencia() {
-   return(
-<div>
-<Helmet><title>Frequencia</title></Helmet>   
-<Navbar />
-<div className="container-fluid">
-      <div className="row">
-            <Sidebar />
-            <main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 
-            <table className="table table-sm">
-  <thead className="thead-light">
-    <tr>
-      <th scope="col">Teleatendente</th>
-      <th scope="col">Data</th>
-      <th scope="col">Periodo</th>
-      <th scope="col">Tipo</th>
-      <th scope="col">Observação</th>
-      <th scope="col">Anotado Por</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">Anna Julia</th>
-      <td>21/04/2020</td>
-      <td>08h/16h</td>
-      <td>OUTROS</td>
-      <td>Sem Ocorrências!</td>
-      <td>Daniel Miranda</td>
-    </tr>
-    <tr>
-      <th scope="row">João Silva</th>
-      <td>21/04/2020</td>
-      <td>08h/16h</td>
-      <td>OUTROS</td>
-      <td>Derrubou a ligação no meio do atendimento, não retornou. Tratou o cidadão com grosseria!</td>
-      <td>Daniel Miranda</td>
-    </tr>
-  </tbody>
-</table>
-            </main>
-        </div>
- </div>
- </div>
- );
+import clsx from 'clsx';
+//Importado os itens necessários para criar as divisoes do site
+import { Container, Grid, Box, Paper, CssBaseline } from '@material-ui/core';
+//Importado o Copyright do rodape do site
+import Copyright from '../../components/Copyright';
+//Importado o CSS Global do Site
+import {Global} from '../../global';
+//Importado o Menu do site 
+import NavbarMenu from '../../components/NavbarMenu/NavbarMenu';
+//Importado o componente que modifica o HEAD do site 
+import {Helmet} from 'react-helmet';
+
+const useStyles = Global;
+
+export default function Dashboard() {
+  const classes = useStyles();
+  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  const title = "Frequência"
+  return (
+    <div className={classes.root}>
+      <Helmet><title>{title}</title></Helmet>
+
+      <CssBaseline />
+
+      <NavbarMenu />
+      
+      <main className={classes.content}>
+        <div className={classes.appBarSpacer} />
+        <Container maxWidth="lg" className={classes.container}>
+          <Grid container spacing={3}>
+            {/* Chart */}
+            <Grid item xs={12} md={8} lg={9}>
+              <Paper className={fixedHeightPaper}>
+
+              </Paper>
+            </Grid>
+            {/* Recent Deposits */}
+            <Grid item xs={12} md={4} lg={3}>
+              <Paper className={fixedHeightPaper}>
+
+              </Paper>
+            </Grid>
+            {/* Recent Orders */}
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>
+
+              </Paper>
+            </Grid>
+          </Grid>
+          <Box pt={4}>
+          <Copyright />
+          </Box>
+        </Container>
+      </main>
+    </div>
+  );
 }
