@@ -13,7 +13,7 @@
 
   const useStyles = Global;
 
-  export default function NavbarMenu() {
+  export default function NavbarMenu(props) {
       const classes = useStyles();
 
       const [open, setOpen] = React.useState(true);
@@ -39,7 +39,7 @@
               <MenuIcon />
             </IconButton>
             <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-              Dashboard
+              {props.titulo}
             </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
