@@ -1,196 +1,151 @@
 import React from 'react';
-import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Drawer from '@material-ui/core/Drawer';
-import Box from '@material-ui/core/Box';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Link from '@material-ui/core/Link';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import { PrimeiraLista, SegundaLista } from '../../components/MenuNavbar';
+//Importado os itens necessários para criar as divisoes do site
+import { Container, Grid, Box, Paper, CssBaseline } from '@material-ui/core';
+//Importado o Copyright do rodape do site
+import Copyright from '../../components/Copyright';
+//Importado o CSS Global do Site
+import {Global} from '../../global';
+//Importado o Menu do site 
+import NavbarMenu from '../../components/NavbarMenu/';
+//Importado o componente que modifica o HEAD do site 
+import {Helmet} from 'react-helmet';
+//Importado o componente de criacao de tabelas
+import MaterialTable from 'material-table';
+
+const useStyles = Global;
+
+export default function Funcionarios() {
+  //Titulo do site
+  const titulo = "Funcionários"
+
+  //Criados os dados no estado da tabela atual
+  const [Table, setTable] = React.useState({
+    columns: [
+      //Coluna do nome 
+      { title: 'Nome', field: 'nome' },
+      //Coluna do Sobrenome
+      { title: 'Sobrenome', field: 'sobrenome' },
+      //Coluna do Aniversário
+      { title: 'Aniversário', field: 'aniversario', type: 'numeric' },
+      //Coluna de cidade com apenas as opções de escolha
+      { title: 'Cidade', field: 'cidade', 
+        lookup: { 34: 'Caraguatatuba', 63: 'Ubatuba' },
+      },
+    ],
+    data: [
+      //Dados da Tabela
+      { nome: 'Mehmet', sobrenome: 'Olaria', aniversario: 1987, cidade: 63 },
+      { nome: 'Daniel', sobrenome: 'Miranda', aniversario: 1987, cidade: 63 },
+      { nome: 'JAA', sobrenome: 'Soluções', aniversario: 1987, cidade: 63 },
+      { nome: 'Fernanda', sobrenome: 'Caput', aniversario: 1987, cidade: 63 },
+    ],
+  });
 
 
-//import Chart from './Chart';
-//import Deposits from './Deposits';
-//import Orders from './Orders';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
-const drawerWidth = 240;
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-  },
-  toolbar: {
-    paddingRight: 24, // keep right padding when drawer closed
-  },
-  toolbarIcon: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: '0 8px',
-    ...theme.mixins.toolbar,
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  menuButton: {
-    marginRight: 36,
-  },
-  menuButtonHidden: {
-    display: 'none',
-  },
-  title: {
-    flexGrow: 1,
-  },
-  drawerPaper: {
-    position: 'relative',
-    whiteSpace: 'nowrap',
-    width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  drawerPaperClose: {
-    overflowX: 'hidden',
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    width: theme.spacing(7),
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9),
-    },
-  },
-  appBarSpacer: theme.mixins.toolbar,
-  content: {
-    flexGrow: 1,
-    height: '100vh',
-    overflow: 'auto',
-  },
-  container: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
-  },
-  paper: {
-    padding: theme.spacing(2),
-    display: 'flex',
-    overflow: 'auto',
-    flexDirection: 'column',
-  },
-  fixedHeight: {
-    height: 240,
-  },
-}));
-
-export default function Dashboard() {
+  //Puxa estilo do site
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+
 
   return (
     <div className={classes.root}>
+      <Helmet><title>{titulo}</title></Helmet>
+         
+      {/* O CSS Baseline é para o MaterialUI manter as mudanças de css e responsividade do site*/}
       <CssBaseline />
-      <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
-        <Toolbar className={classes.toolbar}>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Funcionários
-          </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant="permanent"
-        classes={{
-          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-        }}
-        open={open}
-      >
-        <div className={classes.toolbarIcon}>
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </div>
-        <Divider />
-        <List>{PrimeiraLista}</List>
-        <Divider />
-        <List>{SegundaLista}</List>
-      </Drawer>
+      
+       {/* Inserido o Menu do site */}
+      <NavbarMenu titulo={titulo}/>
+      {/* Todo o conteudo do site fica dentro do Main*/}        
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
+        
         <Container maxWidth="lg" className={classes.container}>
+            {/* GRID Container é como uma Div com a centralzação do container. "spacing" serve para espaçar abaixo da grid*/}
           <Grid container spacing={3}>
-            {/* Chart */}
-            <Grid item xs={12}>
-              <Paper className={fixedHeightPaper}>
+            
+            <Grid item xs={12} >
+              <Paper>
+              <MaterialTable
               
+localization={
+  {  
+  toolbar:{
+    searchTooltip: "Buscar",
+    searchPlaceholder: "Buscar"
+  },
+  header: { actions: 'Opções'},
+        body: {
+            emptyDataSourceMessage: 'Sem resultados a mostrar',
               
+              filterRow: {
+                filterTooltip: 'Filtrar'
+              }
+        }
+    }}
+
+   options={{ addRowPosition: 'first'}}
+    
+     //Titulo da Tabela
+      title="Frequencia Teles"
+      //Dados da Coluna importado do estado criado acima Table
+      columns={Table.columns}
+      //Dados da tabela importado do estado criado acima da tabela.
+      data={Table.data}
+      //Opções de edição da tabela \/\/\/
+      editable={{
+        onRowAdd: (novosDadosTabela) =>
+          new Promise((resolve) => {
+            setTimeout(() => {
+              resolve();
+              setTable((dadosAnterioresTabela) => {
+                const data = [...dadosAnterioresTabela.data];
+                data.push(novosDadosTabela);
+                return { ...dadosAnterioresTabela, data };
+              });
+            }, 600);
+          }),
+        onRowUpdate: (novosDadosTabela, dadosAntigosTabela) =>
+          new Promise((resolve) => {
+            setTimeout(() => {
+              resolve();
+              if (dadosAntigosTabela) {
+                setTable((dadosAnterioresTabela) => {
+                  const data = [...dadosAnterioresTabela.data];
+                  data[data.indexOf(dadosAntigosTabela)] = novosDadosTabela;
+                  return { ...dadosAnterioresTabela, data };
+                });
+              }
+            }, 600);
+          }),
+        onRowDelete: (dadosAntigosTabela) =>
+          new Promise((resolve) => {
+            setTimeout(() => {
+              resolve();
+              setTable((dadosAnterioresTabela) => {
+                const data = [...dadosAnterioresTabela.data];
+                data.splice(data.indexOf(dadosAntigosTabela), 1);
+                return { ...dadosAnterioresTabela, data };
+              });
+            }, 600);
+          }),
+      }}
+    
+    />
+
               </Paper>
             </Grid>
             {/* Recent Orders */}
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-               
+
               </Paper>
             </Grid>
           </Grid>
           <Box pt={4}>
-            <Copyright />
+          <Copyright />
           </Box>
         </Container>
       </main>
