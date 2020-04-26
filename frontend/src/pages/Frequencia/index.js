@@ -21,23 +21,29 @@ export default function Frequencia() {
   const [Table, setTable] = React.useState({
     columns: [
       //Colunas da tabela
-      { title: 'Data', field: 'data', type: 'date' },
-      { title: 'Tipo', field: 'tipo' },
-      { title: 'Nivel', field: 'nivel' },
-      { title: 'Subordinado', field: 'subordinado' },
+      { title: 'Data', field: 'data', type: 'date', initialEditValue:'26.04.2020', headerStyle: {fontWeight: 'bold'} },
+      
+      { title: 'Subordinado', field: 'subordinado', headerStyle: {fontWeight: 'bold'},
+      lookup: { 1: 'Pessoa 1', 2: 'Pessoa 2', 3: 'Pessoa 3', 4: 'Pessoa 4', 5: 'Pessoa 5', 6: 'Pessoa 6', 7: 'Pessoa 7' },
+      },
+      
+      { title: 'Tipo', field: 'tipo', headerStyle: {fontWeight: 'bold'},
+      lookup: { 1: 'Grave', 2: 'Médio', 3:'Leve', 4:'Outro' },
+      },
+     
       //Coluna com apenas opções de escolha
-      { title: 'Expediente', field: 'expediente', 
+      { title: 'Expediente', field: 'expediente', headerStyle: {fontWeight: 'bold'}, 
         lookup: { 1: '08h00/16h00', 2: '12h00/20h00' },
       },
-      { title: 'Ocorrencia', field: 'ocorrencia' },
+      { title: 'Ocorrencia', field: 'ocorrencia', headerStyle: {fontWeight: 'bold'} },
       //Coluna com apenas as opções de escolha
-      { title: 'Supervisor', field: 'supervisor', 
+      { title: 'Supervisor', field: 'supervisor', headerStyle: {fontWeight: 'bold'}, 
         lookup: { 1: 'Daniel Miranda', 2: 'Vanessa Paixão' },
       },
     ],
     data: [
       //Dados da Tabela
-      {tipo: 'Outro', nivel: 'Grave', subordinado: 'João Olimpio', expediente: 1,ocorrencia: 'Colocou o pente no cabelo', supervisor: 1 },
+      {data: '26.04.2020', tipo: 4, subordinado: 1, expediente: 1,ocorrencia: 'Colocou o pente no cabelo', supervisor: 1 },
     ],
   });
 
@@ -87,7 +93,7 @@ localization={
                 filterTooltip: 'Filtrar'
               }
         }
-    }}
+  }}
 
    options={{ addRowPosition: 'first'}}
     
