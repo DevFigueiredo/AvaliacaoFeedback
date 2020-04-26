@@ -9,6 +9,7 @@ import PeopleIcon from '@material-ui/icons/People';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import SettingsIcon from '@material-ui/icons/Settings';
+import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver';
 import HeadsetMicIcon from '@material-ui/icons/HeadsetMic';
  import { Link } from 'react-router-dom';
 
@@ -20,6 +21,25 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Início" />
     </ListItem>
+
+    <Link to="/Monitoria" style={{color:'red'}}>
+    <ListItem button>
+      <ListItemIcon>
+        <RecordVoiceOverIcon />
+      </ListItemIcon>
+      <ListItemText primary="Monitoria" />
+    </ListItem>
+    </Link>
+
+    <Link to="/Feedbacks">
+    <ListItem button>
+      <ListItemIcon>
+        <HeadsetMicIcon />
+      </ListItemIcon>
+      <ListItemText primary="Feedbacks" />
+    </ListItem>
+    </Link>
+
     <Link to="/Frequencia">
     <ListItem button>
       <ListItemIcon>
@@ -28,25 +48,16 @@ export const mainListItems = (
       <ListItemText primary="Frequencia" />
     </ListItem>
     </Link>
-
-    <Link to="/Feedbacks">
+        
+    <Link to="/Funcionarios">
     <ListItem button>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
-      <ListItemText primary="Feedbacks" />
+      <ListItemText primary="Funcionários" />
     </ListItem>
     </Link>
     
-    <Link to="/Monitoria" style={{color:'red'}}>
-    <ListItem button>
-      <ListItemIcon>
-        <HeadsetMicIcon />
-      </ListItemIcon>
-      <ListItemText primary="Monitoria" />
-    </ListItem>
-    </Link>
-
     <Link to="/FichaFuncional">
     <ListItem button>
       <ListItemIcon>

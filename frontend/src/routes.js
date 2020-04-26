@@ -7,6 +7,7 @@ import { BrowserRouter,Switch,Route } from "react-router-dom";
 import Login from './pages/Login';
 import Funcionarios from './pages/Funcionarios';
 import Frequencia from './pages/Frequencia';
+import Inicio from './pages/Inicio';
 
 export default function Routes(){
     return(
@@ -15,6 +16,7 @@ export default function Routes(){
     <Switch>
     <Route path="/" exact component={Login} title="Inicio"/>
     <Route path="/Funcionarios" component={Funcionarios}/>
+    <Route path="/Inicio" component={Inicio}/>
     <Route path="/Frequencia" component={Frequencia}/> </Switch>
     </BrowserRouter>
     );
