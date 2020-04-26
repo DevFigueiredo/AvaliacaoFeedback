@@ -5,12 +5,12 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PeopleIcon from '@material-ui/icons/People';
-import BarChartIcon from '@material-ui/icons/BarChart';
-import LayersIcon from '@material-ui/icons/Layers';
+import ListAltIcon from '@material-ui/icons/ListAlt';
 import AssignmentIcon from '@material-ui/icons/Assignment';
-
+import SettingsIcon from '@material-ui/icons/Settings';
+import HeadsetMicIcon from '@material-ui/icons/HeadsetMic';
+ import { Link } from 'react-router-dom';
 
 export const mainListItems = (
   <div>
@@ -18,33 +18,45 @@ export const mainListItems = (
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
-      <ListItemText primary="Dashboard" />
+      <ListItemText primary="Início" />
     </ListItem>
+    <Link to="/Frequencia">
     <ListItem button>
       <ListItemIcon>
-        <ShoppingCartIcon />
+        <ListAltIcon />
       </ListItemIcon>
-      <ListItemText primary="Orders" />
+      <ListItemText primary="Frequencia" />
     </ListItem>
+    </Link>
+
+    <Link to="/Feedbacks">
     <ListItem button>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
-      <ListItemText primary="Customers" />
+      <ListItemText primary="Feedbacks" />
     </ListItem>
+    </Link>
+    
+    <Link to="/Monitoria" style={{color:'red'}}>
     <ListItem button>
       <ListItemIcon>
-        <BarChartIcon />
+        <HeadsetMicIcon />
       </ListItemIcon>
-      <ListItemText primary="Reports" />
+      <ListItemText primary="Monitoria" />
     </ListItem>
+    </Link>
+
+    <Link to="/FichaFuncional">
     <ListItem button>
       <ListItemIcon>
-        <LayersIcon />
+        <AssignmentIcon />
       </ListItemIcon>
-      <ListItemText primary="Integrations" />
+      <ListItemText primary="Ficha Funcional" />
     </ListItem>
-  </div>
+    </Link>
+    
+    </div>
 );
 
 export const secondaryListItems = (
@@ -52,9 +64,9 @@ export const secondaryListItems = (
     <ListSubheader inset>Saved reports</ListSubheader>
     <ListItem button>
       <ListItemIcon>
-        <AssignmentIcon />
+        <SettingsIcon />
       </ListItemIcon>
-      <ListItemText primary="Current month" />
+      <ListItemText primary="Configurações Avançadas" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>

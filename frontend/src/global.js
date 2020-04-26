@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-    const drawerWidth = 240;
+    const drawerWidth = 280;
  export const Global = (makeStyles((theme) => ({
     root: {
     display: 'flex',

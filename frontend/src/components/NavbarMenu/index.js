@@ -9,14 +9,14 @@
   import { Typography, Divider, IconButton, Badge, List, Toolbar, Drawer, AppBar } from '@material-ui/core';
   import {Global} from '../../global';
   import { mainListItems, secondaryListItems } from '../ListaMenu';
-
+ 
 
   const useStyles = Global;
 
   export default function NavbarMenu(props) {
       const classes = useStyles();
 
-      const [open, setOpen] = React.useState(true);
+      const [open, setOpen] = React.useState(false);
       
     const handleDrawerClose = () => {
       setOpen(false);

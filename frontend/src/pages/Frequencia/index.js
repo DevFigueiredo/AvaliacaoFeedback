@@ -6,7 +6,7 @@ import Copyright from '../../components/Copyright';
 //Importado o CSS Global do Site
 import {Global} from '../../global';
 //Importado o Menu do site 
-import NavbarMenu from '../../components/NavbarMenu/NavbarMenu';
+import NavbarMenu from '../../components/NavbarMenu/';
 //Importado o componente que modifica o HEAD do site 
 import {Helmet} from 'react-helmet';
 //Importado o componente de criacao de tabelas
@@ -20,23 +20,24 @@ export default function Frequencia() {
   //Criados os dados no estado da tabela atual
   const [Table, setTable] = React.useState({
     columns: [
-      //Coluna do nome 
-      { title: 'Nome', field: 'nome' },
-      //Coluna do Sobrenome
-      { title: 'Sobrenome', field: 'sobrenome' },
-      //Coluna do Aniversário
-      { title: 'Aniversário', field: 'aniversario', type: 'numeric' },
-      //Coluna de cidade com apenas as opções de escolha
-      { title: 'Cidade', field: 'cidade', 
-        lookup: { 34: 'Caraguatatuba', 63: 'Ubatuba' },
+      //Colunas da tabela
+      { title: 'Data', field: 'data', type: 'date' },
+      { title: 'Tipo', field: 'tipo' },
+      { title: 'Nivel', field: 'nivel' },
+      { title: 'Subordinado', field: 'subordinado' },
+      //Coluna com apenas opções de escolha
+      { title: 'Expediente', field: 'expediente', 
+        lookup: { 1: '08h00/16h00', 2: '12h00/20h00' },
+      },
+      { title: 'Ocorrencia', field: 'ocorrencia' },
+      //Coluna com apenas as opções de escolha
+      { title: 'Supervisor', field: 'supervisor', 
+        lookup: { 1: 'Daniel Miranda', 2: 'Vanessa Paixão' },
       },
     ],
     data: [
       //Dados da Tabela
-      { nome: 'Mehmet', sobrenome: 'Olaria', aniversario: 1987, cidade: 63 },
-      { nome: 'Daniel', sobrenome: 'Miranda', aniversario: 1987, cidade: 63 },
-      { nome: 'JAA', sobrenome: 'Soluções', aniversario: 1987, cidade: 63 },
-      { nome: 'Fernanda', sobrenome: 'Caput', aniversario: 1987, cidade: 63 },
+      {tipo: 'Outro', nivel: 'Grave', subordinado: 'João Olimpio', expediente: 1,ocorrencia: 'Colocou o pente no cabelo', supervisor: 1 },
     ],
   });
 
@@ -104,7 +105,9 @@ localization={
               resolve();
               setTable((dadosAnterioresTabela) => {
                 const data = [...dadosAnterioresTabela.data];
+               
                 data.push(novosDadosTabela);
+                
                 return { ...dadosAnterioresTabela, data };
               });
             }, 600);

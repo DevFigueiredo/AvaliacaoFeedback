@@ -6,7 +6,7 @@ import Copyright from '../../components/Copyright';
 //Importado o CSS Global do Site
 import {Global} from '../../global';
 //Importado o Menu do site 
-import NavbarMenu from '../../components/NavbarMenu/NavbarMenu';
+import NavbarMenu from '../../components/NavbarMenu/';
 //Importado o componente que modifica o HEAD do site 
 import {Helmet} from 'react-helmet';
 //Importado o componente de criacao de tabelas
