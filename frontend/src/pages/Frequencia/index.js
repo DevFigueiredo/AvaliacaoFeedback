@@ -16,14 +16,15 @@ const useStyles = Global;
 
 export default function Frequencia() {
 
-
+   
   //Criados os dados no estado da tabela atual
   const [Table, setTable] = React.useState({
     columns: [
       //Colunas da tabela
-      { title: 'Data', field: 'data', type: 'date', initialEditValue:'26.04.2020', headerStyle: {fontWeight: 'bold'} },
+      { title: 'Data', field: 'data', type: 'date', initialEditValue:new Date(), headerStyle: {fontWeight: 'bold'} },
       
       { title: 'Subordinado', field: 'subordinado', headerStyle: {fontWeight: 'bold'},
+      options: {sorting: true},
       lookup: { 1: 'Pessoa 1', 2: 'Pessoa 2', 3: 'Pessoa 3', 4: 'Pessoa 4', 5: 'Pessoa 5', 6: 'Pessoa 6', 7: 'Pessoa 7' },
       },
       
@@ -43,7 +44,7 @@ export default function Frequencia() {
     ],
     data: [
       //Dados da Tabela
-      {data: '26.04.2020', tipo: 4, subordinado: 1, expediente: 1,ocorrencia: 'Colocou o pente no cabelo', supervisor: 1 },
+      {data: '2020/04/29', tipo: 4, subordinado: 1, expediente: 1,ocorrencia: 'Colocou o pente no cabelo', supervisor: 1 },
     ],
   });
 
@@ -81,21 +82,58 @@ export default function Frequencia() {
               
 localization={
   {  
+ 
+  pagination:{
+    labelRowsSelect: 'Linhas',
+    labelRowsPerPage: 'Linhas por Página',
+    firstAriaLabel: 'Primeira Página',
+    firstTooltip: 'Primeira Página',
+    previousAriaLabel:'Página Anteiror',
+    previousTooltip: 'Página Anterior',
+    nextAriaLabel: 'Próxima Página',
+    nextTooltip: 'Próxima Página',
+    lastAriaLabel: 'Última Página',
+    lastTooltip: 'Última Página',
+
+  },
   toolbar:{
     searchTooltip: "Buscar",
-    searchPlaceholder: "Buscar"
+    searchPlaceholder: "Buscar",
+    exportAriaLabel:"Exportar",
+    exportTitle: "Exportar",
+    exportName: "Exportar Excel",
+
   },
   header: { actions: 'Opções'},
         body: {
+          addTooltip: 'Adicionar',
+          deleteTooltip: 'Excluir',
+          editTooltip: 'Editar',
+          editRow:{
+            cancelTooltip:'Cancelar',
+            saveTooltip: 'Salvar',
+            deleteText: 'Você tem certeza que irá excluir ?'
+          },
             emptyDataSourceMessage: 'Sem resultados a mostrar',
-              
               filterRow: {
                 filterTooltip: 'Filtrar'
               }
         }
+        
   }}
 
-   options={{ addRowPosition: 'first'}}
+   options={{
+    addRowPosition: 'first',
+    exportAllData: true, 
+    exportButton: true, 
+    exportFileName: 'Frequencia',
+    pageSize: 11,
+    pageSizeOptions: [5, 10, 11, 12, 15, 20, 30],
+    paginationType:'stepped',
+    exportCsv: ()=>{
+   //Criar um post com o axios enviando o Topo e Conteudo com Json para exportar a planilha
+   }
+  }}
     
      //Titulo da Tabela
       title="Frequencia Teles"
