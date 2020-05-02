@@ -1,10 +1,6 @@
 import React, {useRef} from 'react';
-//Importado os itens necessários para criar as divisoes do site
-import { Container, Grid, Box, Paper, CssBaseline } from '@material-ui/core';
 //Importado o Copyright do rodape do site
 import Copyright from '../../components/Copyright';
-//Importado o CSS Global do Site
-import {Global} from '../../global';
 //Importado o Menu do site 
 import NavbarMenu from '../../components/NavbarMenu/';
 //Importado o componente que modifica o HEAD do site 
@@ -18,13 +14,10 @@ import Input from '../../components/Form/Input'
 import * as Yup from 'yup';
 
 
-const useStyles = Global;
 
 export default function NovoFuncionario() {
   //Titulo do site
   const titulo = "Novo Funcionário"
-  //Puxa estilo do site
-  const classes = useStyles();
 
 
 
@@ -75,37 +68,11 @@ const initialData = {
   email: 'danielmirandacanal@gmail.com'
 }
 
-
-
-
-
-
-
-
-
   return (
-    <div className={classes.root}>
-      <Helmet><title>{titulo}</title></Helmet>
-         
-      {/* O CSS Baseline é para o MaterialUI manter as mudanças de css e responsividade do site*/}
-      <CssBaseline />
-      
-       {/* Inserido o Menu do site */}
-      <NavbarMenu titulo={titulo}/>
-      {/* Todo o conteudo do site fica dentro do Main*/}        
-      <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-  
-     
-        
-        <Container maxWidth="lg" className={classes.container}>
-            {/* GRID Container é como uma Div com a centralzação do container. "spacing" serve para espaçar abaixo da grid*/}
-          <Grid container spacing={3}>
-            
-            <Grid item xs={12} >
-              <Paper className={classes.paper}>
-          {/*Formulário de Cadastro de tele atendente*/}
-          <Form ref={formRef} initialData={initialData} onSubmit={handleSubmit}>
+    <div>    
+    {/*Formulário de Cadastro de tele atendente*/}
+          <Form ref={formRef} initialData={initialData} onSubmit={handleSubmit} >
+         <div id="InfoPessoais">
           <Scope path="infoPessoais">
           <Input name="nome" />
           <Input name="email" />
@@ -118,7 +85,8 @@ const initialData = {
           <Input name="tamUniforme" />
           <Input name="sexo" />
           </Scope>
-
+          </div>
+          <div id="Endereco" >
            <Scope path="endereco">
           <Input name="logradouro" />
           <Input name="numero" />
@@ -127,7 +95,9 @@ const initialData = {
           <Input name="cep" />
           <Input name="complemento" />
           </Scope>
+          </div>
 
+          <div id="Documentacao">
           <Scope path="reservista">
           <Input name="numero" />
           <Input name="categoria" />
@@ -148,23 +118,10 @@ const initialData = {
           <Input name="agencia" />
           <Input name="contaCorrente" />
           </Scope>
+          </div>
 
           <button type="submit" >Enviar</button>
           </Form>
-              </Paper>
-            </Grid>
-            {/* Recent Orders */}
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
-
-              </Paper>
-            </Grid>
-          </Grid>
-          <Box pt={4}>
-          <Copyright />
-          </Box>
-        </Container>
-      </main>
-    </div>
-  );
+          </div>
+ );
 }
