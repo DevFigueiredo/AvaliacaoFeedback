@@ -76,6 +76,13 @@ const initialData = {
 }
 
 
+
+
+
+
+
+
+
   return (
     <div className={classes.root}>
       <Helmet><title>{titulo}</title></Helmet>
@@ -88,6 +95,8 @@ const initialData = {
       {/* Todo o conteudo do site fica dentro do Main*/}        
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
+  
+     
         
         <Container maxWidth="lg" className={classes.container}>
             {/* GRID Container é como uma Div com a centralzação do container. "spacing" serve para espaçar abaixo da grid*/}
@@ -102,7 +111,7 @@ const initialData = {
           <Input name="email" />
           <Input name="nascimento" />
           <Input name="rg" />
-          <Input name="cpf" />
+          <Input id="standard-basic" name="cpf" />
           <Input name="VA" />
           <Input name="VT" />
           <Input name="nomeMae" />
