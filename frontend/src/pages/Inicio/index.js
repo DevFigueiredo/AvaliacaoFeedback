@@ -21,7 +21,7 @@ export default function Inicio() {
   const classes = useStyles();
   
   //Titulo do site
-  const titulo = "Frequência"
+  const titulo = "Início"
 
 
   return (
