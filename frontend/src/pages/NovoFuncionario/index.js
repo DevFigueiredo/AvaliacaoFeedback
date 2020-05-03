@@ -1,10 +1,21 @@
 import React, {useRef} from 'react';
+//Importado os itens necessários para criar as divisoes do site
+import { Container, Grid, Box, Paper, CssBaseline } from '@material-ui/core';
 //Importado o Copyright do rodape do site
 import Copyright from '../../components/Copyright';
+//Importado o CSS Global do Site
+import {Global} from '../../global';
+import '../../bootstrap.min.css'
+import './style.css'
 //Importado o Menu do site 
 import NavbarMenu from '../../components/NavbarMenu/';
 //Importado o componente que modifica o HEAD do site 
 import {Helmet} from 'react-helmet';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import PhoneIcon from '@material-ui/icons/Phone';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import PersonPinIcon from '@material-ui/icons/PersonPin';
 
 //Importado o Unform da Rockeseat
 import { Form } from '@unform/web';
@@ -14,10 +25,13 @@ import Input from '../../components/Form/Input'
 import * as Yup from 'yup';
 
 
+const useStyles = Global;
 
 export default function NovoFuncionario() {
   //Titulo do site
   const titulo = "Novo Funcionário"
+  //Puxa estilo do site
+  const classes = useStyles();
 
 
 
@@ -68,60 +82,217 @@ const initialData = {
   email: 'danielmirandacanal@gmail.com'
 }
 
+
+
+
+
+
+const [posicao, setPosicao] = React.useState(0);
+
+const handleChange = (event, novaPosicao) => {
+  setPosicao(novaPosicao);
+  
+if(novaPosicao==0){
+  document.querySelector('#InfoPessoais').style="display:flex;";
+  document.querySelector('#InfoPessoais').classList.add("form-row");
+  document.querySelector('#Endereco').style="display:none";
+  document.querySelector('#Documentacao').style="display:none";
+}
+if(novaPosicao==1){
+  document.querySelector('#InfoPessoais').style="display:none";
+  document.querySelector('#Endereco').style="display:flex";
+  document.querySelector('#Documentacao').style="display:none";
+}
+if(novaPosicao==2){
+  document.querySelector('#InfoPessoais').style="display:none";
+  document.querySelector('#Endereco').style="display:none";
+  document.querySelector('#Documentacao').style="display:flex";
+}
+
+};
+
   return (
-    <div>    
-    {/*Formulário de Cadastro de tele atendente*/}
-          <Form ref={formRef} initialData={initialData} onSubmit={handleSubmit} >
-         <div id="InfoPessoais">
-          <Scope path="infoPessoais">
-          <Input name="nome" />
-          <Input name="email" />
-          <Input name="nascimento" />
-          <Input name="rg" />
-          <Input id="standard-basic" name="cpf" />
-          <Input name="VA" />
-          <Input name="VT" />
-          <Input name="nomeMae" />
-          <Input name="tamUniforme" />
-          <Input name="sexo" />
-          </Scope>
+    <div className={classes.root}>
+<Helmet>
+<title>{titulo}</title>
+</Helmet>          
+      {/* O CSS Baseline é para o MaterialUI manter as mudanças de css e responsividade do site*/}
+      <CssBaseline />
+      
+       {/* Inserido o Menu do site */}
+      <NavbarMenu titulo={titulo}/>
+      {/* Todo o conteudo do site fica dentro do Main*/}        
+      <main className={classes.content}>
+        <div className={classes.appBarSpacer} />
+  
+     
+        
+        <Container maxWidth="lg" className={classes.container}>
+            {/* GRID Container é como uma Div com a centralzação do container. "spacing" serve para espaçar abaixo da grid*/}
+          <Grid container spacing={3}>
+            
+            <Grid item xs={12}  >
+              <Paper className={classes.paper} >
+                
+      <Tabs
+        value={posicao}
+        onChange={handleChange}
+        variant="fullWidth"
+        indicatorColor="primary"
+        textColor="primary"
+        aria-label="icon label tabs example"
+      >
+        <Tab icon={<PhoneIcon />} label="Perfil" />
+        <Tab icon={<FavoriteIcon />} label="Endereço" />
+        <Tab icon={<PersonPinIcon />} label="Documentação" />
+      </Tabs>
+
+
+          {/*Formulário de Cadastro de tele atendente*/}
+          <Form ref={formRef} initialData={initialData} onSubmit={handleSubmit}  >
+           
+         <div id="InfoPessoais" className="form-row animacao-direita">
+          <Scope path="infoPessoais" >
+          <div className="form-group col-md-6 ">
+          <label>Nome</label>
+          <Input name="nome" className="form-control" />
           </div>
-          <div id="Endereco" >
-           <Scope path="endereco">
-          <Input name="logradouro" />
-          <Input name="numero" />
-          <Input name="bairro" />
-          <Input name="cidade" />
-          <Input name="cep" />
-          <Input name="complemento" />
-          </Scope>
+          
+          <div className="form-group col-md-6">
+          <label>Nascimento</label>
+          <Input className="form-control" name="nascimento" />
+          </div>
+          
+          <div className="form-group col-md-6 ">
+          <label>E-Mail</label>
+          <Input name="email" className="form-control" />
+          </div>
+          
+          <div className="form-group col-md-2">
+          <label>Vale Alimentação</label>
+          <div className="input-group-prepend">
+          <div className="input-group-text"><strong>R$</strong></div>
+          <Input className="form-control" name="VA" />
+          </div>  
+          </div>
+          
+          <div className="form-group col-md-2 ">
+          <label>Vale Transporte</label>
+          <div className="input-group-prepend">
+          <div className="input-group-text"><strong>R$</strong></div>
+          <Input className="form-control" name="VT" />
+          </div>  
+          </div>
+          
+
+          <div className="form-group col-md-2 ">
+          <label>Tam. Uniforme</label>
+          <div className="input-group-prepend">
+          <div className="input-group-text"><strong>Nº</strong></div>
+          
+          <Input className="form-control" name="tamUniforme" />
+          </div>
           </div>
 
-          <div id="Documentacao">
+          <div className="form-group col-md-6">
+          <label>RG</label>
+          <Input className="form-control" name="rg" />
+          </div>
+          
+          <div className="form-group col-md-6">
+          <label>CPF</label>
+          <Input className="form-control" id="standard-basic" name="cpf" />
+          </div>
+          
+          
+          <div className="form-group col-md-6">
+          <label>Nome da Mãe</label>
+          <Input className="form-control" name="nomeMae" />
+          </div>
+                    
+          <div className="form-group col-md-6">
+          <label>Sexo</label>
+          <Input className="form-control" name="sexo" />
+          </div>
+          </Scope>
+          
+          </div>
+
+          {/*Formulário do Endereço do TeleAtendente */}
+          <div id="Endereco" className="form-row animacao-direita" style={{display: 'none'}}>
+           <Scope path="endereco">
+         
+          <div className="form-group col-md-6">
+          <label>Logradouro</label>
+          <Input className="form-control" name="logradouro" />
+          </div>
+         
+          <div className="form-group col-md-6">
+          <label>Numero</label>
+          <Input className="form-control" name="numero" />
+          </div>
+          
+          <div className="form-group col-md-6">
+          <label>Bairro</label>
+          <Input className="form-control" name="bairro" />
+          </div>
+          
+          <div className="form-group col-md-6">
+          <label>Sexo</label>
+          <Input className="form-control" name="cidade" />
+          </div>
+          
+          <div className="form-group col-md-6">
+          <label>CEP</label>
+          <Input className="form-control" name="cep" />
+          </div>
+
+          <div className="form-group col-md-6">
+          <label>Complemento</label>
+          <Input className="form-control" name="complemento" />
+          </div>        
+           </Scope>
+          </div>
+
+          <div id="Documentacao" style={{display: 'none'}}>
           <Scope path="reservista">
-          <Input name="numero" />
-          <Input name="categoria" />
+          <Input className="form-control" name="numero" />
+          <Input className="form-control" name="categoria" />
           </Scope>
           
           <Scope path="carteiraHabilitacao">
-          <Input name="numero" />
-          <Input name="categoria" />
+          <Input className="form-control" name="numero" />
+          <Input className="form-control" name="categoria" />
           </Scope>
           <Scope path="CTPS">
-          <Input name="numero" />
-          <Input name="serie" />
-          <Input name="uf" />
+          <Input className="form-control" name="numero" />
+          <Input className="form-control" name="serie" />
+          <Input className="form-control" name="uf" />
           </Scope>
           <Scope path="infoBancaria">
-          <Input name="numBanco" />
-          <Input name="banco" />
-          <Input name="agencia" />
-          <Input name="contaCorrente" />
+          <Input className="form-control" name="numBanco" />
+          <Input className="form-control" name="banco" />
+          <Input className="form-control" name="agencia" />
+          <Input className="form-control" name="contaCorrente" />
           </Scope>
           </div>
 
           <button type="submit" >Enviar</button>
           </Form>
-          </div>
- );
+              </Paper>
+            </Grid>
+            {/* Recent Orders */}
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>
+
+              </Paper>
+            </Grid>
+          </Grid>
+          <Box pt={4}>
+          <Copyright />
+          </Box>
+        </Container>
+      </main>
+    </div>
+  );
 }
