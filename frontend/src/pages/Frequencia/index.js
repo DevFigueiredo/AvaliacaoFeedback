@@ -11,82 +11,10 @@ import NavbarMenu from '../../components/NavbarMenu/';
 import {Helmet} from 'react-helmet';
 //Importado o componente de criacao de tabelas
 import MaterialTable from 'material-table';
-import './style.css';
-import Modal from '@material-ui/core/Modal';
-//import { makeStyles } from '@material-ui/core/styles';
 
-/*
-const ModalStyle = makeStyles((theme) => ({
-  paper: {
-    width: '80%',
-    backgroundColor: theme.palette.background.paper,
-    border: 'none',
-    margin: '0 auto',
-    boxShadow: theme.shadows[5],
-  },
-  modal: {
-    zIndex:2,
-    paddingTop:'100px',
-    position:'fixed',
-    display: 'inline-block',
-    left:0,
-    top:0,
-    overflow:'auto',
-    width:'100%',
-  },
-}));
-*/
 const useStyles = Global;
 
 export default function Frequencia() {
-  //Puxa estilo do site
-  const classes = useStyles();
-//  const classesModal = ModalStyle();
-  const [open, setOpen] = React.useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const body = (
-   
-    <div >
-    <div className="modal-content">
-      <div className="modal-header">
-        <h5 className="modal-title">Modal title</h5>
-        <button type="button" className="close" onClick={handleClose}>
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div className="modal-body">
-       <h2 id="simple-modal-title">Text in a modal</h2>
-      <p id="simple-modal-description">Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-      <p id="simple-modal-description">Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-      <p id="simple-modal-description">Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-      <p id="simple-modal-description">Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-      <p id="simple-modal-description">Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-      <p id="simple-modal-description">Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-      <p id="simple-modal-description">Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-      <p id="simple-modal-description">Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-      <p id="simple-modal-description">Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-      <p id="simple-modal-description">Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-      <p id="simple-modal-description">Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-      <p id="simple-modal-description">Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-      <p id="simple-modal-description">Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-      </div>
-      <div className="modal-footer">
-        <button type="button" className="btn btn-primary">Save changes</button>
-        <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={handleClose}>Close</button>
-      </div>
-    </div>
-    </div>
-  );
-  
-  //Titulo do site
-  const titulo = "Frequência"
 
    
   //Criados os dados no estado da tabela atual
@@ -121,11 +49,19 @@ export default function Frequencia() {
   });
 
 
+
+
+
+  //Puxa estilo do site
+  const classes = useStyles();
+  
+  //Titulo do site
+  const titulo = "Frequência"
+
+
   return (
     <div className={classes.root}>
-      <Helmet><title>{titulo}</title>
-      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
-     </Helmet>
+      <Helmet><title>{titulo}</title></Helmet>
          
       {/* O CSS Baseline é para o MaterialUI manter as mudanças de css e responsividade do site*/}
       <CssBaseline />
@@ -137,26 +73,11 @@ export default function Frequencia() {
         <div className={classes.appBarSpacer} />
         
         <Container maxWidth="lg" className={classes.container}>
-        <div>
-     
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-     >
-        {body}
-      </Modal>
-    </div>
-         
             {/* GRID Container é como uma Div com a centralzação do container. "spacing" serve para espaçar abaixo da grid*/}
           <Grid container spacing={3}>
             
             <Grid item xs={12} >
               <Paper>
-              <button type="button" onClick={handleOpen}>
-        Adicionar frequencia
-      </button>
               <MaterialTable
               
 localization={

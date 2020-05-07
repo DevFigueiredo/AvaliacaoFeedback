@@ -1,22 +1,21 @@
-import React, {useRef, Component} from 'react';
+import React, {useRef} from 'react';
 //Importado os itens necessários para criar as divisoes do site
 import { Container, Grid, Box, Paper, CssBaseline } from '@material-ui/core';
 //Importado o Copyright do rodape do site
 import Copyright from '../../components/Copyright';
 //Importado o CSS Global do Site
 import {Global} from '../../global';
+import '../../bootstrap.min.css'
 import './style.css'
-//Importado o icone de pessoa
-import { BsFillPersonLinesFill, BsCreditCard } from "react-icons/bs";
-import { FaHome } from "react-icons/fa";
-
 //Importado o Menu do site 
 import NavbarMenu from '../../components/NavbarMenu/';
 //Importado o componente que modifica o HEAD do site 
 import {Helmet} from 'react-helmet';
-//Importados as guias(tabs) 
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import PhoneIcon from '@material-ui/icons/Phone';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import PersonPinIcon from '@material-ui/icons/PersonPin';
 
 //Importado o Unform da Rockeseat
 import { Form } from '@unform/web';
@@ -25,15 +24,10 @@ import Input from '../../components/Form/Input'
 //Importado o yup para realizar validações no formulário
 import * as Yup from 'yup';
 
-//Importado o Botao do Formulário
-import Button from '@material-ui/core/Button';
-//Importado o Select Option de formularios do react-select para melhor experiencia
-import Select from 'react-select'
 
 const useStyles = Global;
 
 export default function NovoFuncionario() {
-  
   //Titulo do site
   const titulo = "Novo Funcionário"
   //Puxa estilo do site
@@ -60,6 +54,7 @@ async function handleSubmit(data, {reset}){
       VT: Yup.string().required('Vale Transporte é Obrigatório'),
       nomeMae: Yup.string().required('Nome da Mãe é Obrigatório'),
       tamUniforme: Yup.string().required('Tamanho do Uniforme é Obrigatório'),
+      sexo: Yup.string().required('Sexo é Obrigatório'),
     })
     });
     await schema.validate(data, {
@@ -83,6 +78,13 @@ async function handleSubmit(data, {reset}){
   }
 
 }
+const initialData = {
+  email: 'danielmirandacanal@gmail.com'
+}
+
+
+
+
 
 
 const [posicao, setPosicao] = React.useState(0);
@@ -108,26 +110,7 @@ if(novaPosicao==2){
 }
 
 };
-const Departamentos = [
-  {
-    label: 'Departamentos',
-    options: [ 
-    { value: '1', label: 'Tele Atendimento'},
-    { value: '2', label: 'Supervisão', isDisabled: true },
-    { value: '3', label: 'Gestão', isDisabled: true },
-    ],
-  }];
 
-  const Sexo = [
-    {
-      label: 'Sexo',
-      options: [ 
-      { value: 'M', label: 'Masculino'},
-      { value: 'F', label: 'Feminino' },
-      ],
-    }];
-  
-    
   return (
     <div className={classes.root}>
 <Helmet>
@@ -153,29 +136,22 @@ const Departamentos = [
                 
       <Tabs
         value={posicao}
-        onChange={handleChange}   
+        onChange={handleChange}
         variant="fullWidth"
         indicatorColor="primary"
         textColor="primary"
         aria-label="icon label tabs example"
       >
-        <Tab icon={<BsFillPersonLinesFill size={20} />} label="Perfil" />
-        <Tab icon={<FaHome size={21} />} label="Endereço" />
-        <Tab icon={<BsCreditCard size={20} />} label="Documentação" />
+        <Tab icon={<PhoneIcon />} label="Perfil" />
+        <Tab icon={<FavoriteIcon />} label="Endereço" />
+        <Tab icon={<PersonPinIcon />} label="Documentação" />
       </Tabs>
 
 
           {/*Formulário de Cadastro de tele atendente*/}
-          <Form ref={formRef} onSubmit={handleSubmit}  >
+          <Form ref={formRef} initialData={initialData} onSubmit={handleSubmit}  >
            
          <div id="InfoPessoais" className="form-row animacao-direita">
-         
-         <div className="form-group col-12">
-
-         <label>Departamento</label> 
-         <Select name="departamento" options={Departamentos} />
-         </div>
-
           <Scope path="infoPessoais" >
           <div className="form-group col-md-6 ">
           <label>Nome</label>
@@ -234,10 +210,10 @@ const Departamentos = [
           <Input className="form-control" name="nomeMae" />
           </div>
                     
-          <div className="form-group col-6">
-         <label>Sexo</label> 
-         <Select name="departamento" options={Sexo} />
-         </div>
+          <div className="form-group col-md-6">
+          <label>Sexo</label>
+          <Input className="form-control" name="sexo" />
+          </div>
           </Scope>
           
           </div>
@@ -245,91 +221,63 @@ const Departamentos = [
           {/*Formulário do Endereço do TeleAtendente */}
           <div id="Endereco" className="form-row animacao-direita" style={{display: 'none'}}>
            <Scope path="endereco">
-          
-          <div className="form-group col-md-2">
-          <label>CEP</label>
-          <Input className="form-control" name="cep" />
-          </div>
-
-          <div className="form-group col-md-5">
+         
+          <div className="form-group col-md-6">
           <label>Logradouro</label>
           <Input className="form-control" name="logradouro" />
           </div>
          
-          <div className="form-group col-md-1">
+          <div className="form-group col-md-6">
           <label>Numero</label>
           <Input className="form-control" name="numero" />
           </div>
           
-          <div className="form-group col-md-2">
+          <div className="form-group col-md-6">
           <label>Bairro</label>
           <Input className="form-control" name="bairro" />
           </div>
           
-          <div className="form-group col-md-2">
+          <div className="form-group col-md-6">
+          <label>Sexo</label>
+          <Input className="form-control" name="cidade" />
+          </div>
+          
+          <div className="form-group col-md-6">
+          <label>CEP</label>
+          <Input className="form-control" name="cep" />
+          </div>
+
+          <div className="form-group col-md-6">
           <label>Complemento</label>
           <Input className="form-control" name="complemento" />
           </div>        
-
-          <div className="form-group col-md-6">
-          <label>Ponto de Referencia</label>
-          <Input className="form-control" name="pontoReferencia" />
-          </div>
-
-          <div className="form-group col-md-6">
-          <label>Cidade</label>
-          <Input className="form-control" name="cidade" />
-          </div>
-
            </Scope>
           </div>
 
-          <div id="Documentacao" className="form-row animacao-direita" style={{display: 'none'}}>
-          
-          <Scope path="documentacao">
-          <div className="form-group col-md-4">
-          <label>Reservista</label>
-          <Input className="form-control" name="reservista" />
-          </div>
-          
-          <div className="form-group col-md-4">
-          <label>Habilitação</label>
-          <Input className="form-control" name="habilitacao" />
-          </div>
-          
-          <div className="form-group col-md-4">
-          <label>Carteira de Trabalho</label>
-          <Input className="form-control" name="carteiraTrabalho" />
-          </div>
+          <div id="Documentacao" style={{display: 'none'}}>
+          <Scope path="reservista">
+          <Input className="form-control" name="numero" />
+          <Input className="form-control" name="categoria" />
           </Scope>
-
-
+          
+          <Scope path="carteiraHabilitacao">
+          <Input className="form-control" name="numero" />
+          <Input className="form-control" name="categoria" />
+          </Scope>
+          <Scope path="CTPS">
+          <Input className="form-control" name="numero" />
+          <Input className="form-control" name="serie" />
+          <Input className="form-control" name="uf" />
+          </Scope>
           <Scope path="infoBancaria">
-          
-          <div className="form-group col-md-1">
-          <label>Nº Banco</label>
           <Input className="form-control" name="numBanco" />
-          </div>
-          
-          <div className="form-group col-md-4">
-          <label>Banco</label>
           <Input className="form-control" name="banco" />
-          </div>
-
-          <div className="form-group col-md-2">
-          <label>Agencia</label>
           <Input className="form-control" name="agencia" />
-          </div>
-          
-          <div className="form-group col-md-5">
-          <label>Conta corrente</label>
           <Input className="form-control" name="contaCorrente" />
-          </div>
           </Scope>
           </div>
-          <Button type="submit" className="btn btn-block" variant="contained" color="primary">
-          <strong>CADASTRAR FUNCIONÁRIO</strong>
-          </Button>
+
+          <button type="submit" >Enviar</button>
           </Form>
               </Paper>
             </Grid>

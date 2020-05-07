@@ -1,9 +1,21 @@
 {
-  "name": "frontend",
-  "version": "0.1.0",
+  "name": "AvaliacaoFeedback",
+  "version": "1.0",
   "private": true,
   "dependencies": {
-  
+    "@material-ui/core": "^4.9.13",
+    "@material-ui/icons": "^4.9.1",
+    "@unform/core": "^2.1.0",
+    "@unform/web": "^2.1.0",
+    "eslint-plugin-react": "^7.19.0",
+    "material-table": "^1.57.2",
+    "nodemon": "^2.0.3",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-helmet": "^6.0.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.4.1",
+    "yup": "^0.28.5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -25,5 +37,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "Sistema de Avaliação e Feedback para Operação de Atendimento",
+  "main": "index.js",
+  "license": "MIT"
 }
