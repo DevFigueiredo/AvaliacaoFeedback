@@ -1,5 +1,7 @@
 import React from 'react';
 import Routes from './routes'
+import './bootstrap.min.css'
+
 
 function App() {
   return (

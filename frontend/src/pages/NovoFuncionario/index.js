@@ -1,12 +1,10 @@
-import React, {useRef} from 'react';
-import {Link} from 'react-router-dom'
+import React, {useRef, Component} from 'react';
 //Importado os itens necessários para criar as divisoes do site
 import { Container, Grid, Box, Paper, CssBaseline } from '@material-ui/core';
 //Importado o Copyright do rodape do site
 import Copyright from '../../components/Copyright';
 //Importado o CSS Global do Site
 import {Global} from '../../global';
-import '../../bootstrap.min.css'
 import './style.css'
 //Importado o icone de pessoa
 import { BsFillPersonLinesFill, BsCreditCard } from "react-icons/bs";
@@ -16,6 +14,7 @@ import { FaHome } from "react-icons/fa";
 import NavbarMenu from '../../components/NavbarMenu/';
 //Importado o componente que modifica o HEAD do site 
 import {Helmet} from 'react-helmet';
+//Importados as guias(tabs) 
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
@@ -26,10 +25,15 @@ import Input from '../../components/Form/Input'
 //Importado o yup para realizar validações no formulário
 import * as Yup from 'yup';
 
+//Importado o Botao do Formulário
+import Button from '@material-ui/core/Button';
+//Importado o Select Option de formularios do react-select para melhor experiencia
+import Select from 'react-select'
 
 const useStyles = Global;
 
 export default function NovoFuncionario() {
+  
   //Titulo do site
   const titulo = "Novo Funcionário"
   //Puxa estilo do site
@@ -56,7 +60,6 @@ async function handleSubmit(data, {reset}){
       VT: Yup.string().required('Vale Transporte é Obrigatório'),
       nomeMae: Yup.string().required('Nome da Mãe é Obrigatório'),
       tamUniforme: Yup.string().required('Tamanho do Uniforme é Obrigatório'),
-      sexo: Yup.string().required('Sexo é Obrigatório'),
     })
     });
     await schema.validate(data, {
@@ -80,13 +83,6 @@ async function handleSubmit(data, {reset}){
   }
 
 }
-const initialData = {
-  email: 'danielmirandacanal@gmail.com'
-}
-
-
-
-
 
 
 const [posicao, setPosicao] = React.useState(0);
@@ -112,7 +108,26 @@ if(novaPosicao==2){
 }
 
 };
+const Departamentos = [
+  {
+    label: 'Departamentos',
+    options: [ 
+    { value: '1', label: 'Tele Atendimento'},
+    { value: '2', label: 'Supervisão', isDisabled: true },
+    { value: '3', label: 'Gestão', isDisabled: true },
+    ],
+  }];
 
+  const Sexo = [
+    {
+      label: 'Sexo',
+      options: [ 
+      { value: 'M', label: 'Masculino'},
+      { value: 'F', label: 'Feminino' },
+      ],
+    }];
+  
+    
   return (
     <div className={classes.root}>
 <Helmet>
@@ -151,9 +166,16 @@ if(novaPosicao==2){
 
 
           {/*Formulário de Cadastro de tele atendente*/}
-          <Form ref={formRef} initialData={initialData} onSubmit={handleSubmit}  >
+          <Form ref={formRef} onSubmit={handleSubmit}  >
            
          <div id="InfoPessoais" className="form-row animacao-direita">
+         
+         <div className="form-group col-12">
+
+         <label>Departamento</label> 
+         <Select name="departamento" options={Departamentos} />
+         </div>
+
           <Scope path="infoPessoais" >
           <div className="form-group col-md-6 ">
           <label>Nome</label>
@@ -212,10 +234,10 @@ if(novaPosicao==2){
           <Input className="form-control" name="nomeMae" />
           </div>
                     
-          <div className="form-group col-md-6">
-          <label>Sexo</label>
-          <Input className="form-control" name="sexo" />
-          </div>
+          <div className="form-group col-6">
+         <label>Sexo</label> 
+         <Select name="departamento" options={Sexo} />
+         </div>
           </Scope>
           
           </div>
@@ -305,8 +327,9 @@ if(novaPosicao==2){
           </div>
           </Scope>
           </div>
-          <button type="submit" class="btn btn-primary btn-md btn-block"><strong>CADASTRAR FUNCIONÁRIO</strong></button>
-
+          <Button type="submit" className="btn btn-block" variant="contained" color="primary">
+          <strong>CADASTRAR FUNCIONÁRIO</strong>
+          </Button>
           </Form>
               </Paper>
             </Grid>
